@@ -9,7 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@apollo/client": "^4.2.10",
+    "@apollo/client": "^3.11.8",
     "@nhost/nextjs": "^2.3.1",
     "@nhost/nhost-js": "^4.8.0",
     "@nhost/react": "^3.11.2",
