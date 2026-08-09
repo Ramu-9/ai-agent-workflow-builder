@@ -471,6 +471,21 @@
         filter:
           org_id:
             _eq: X-Hasura-Org-Id
+  event_triggers:
+    - name: workflow_results_insert
+      definition:
+        enable_manual: false
+        insert:
+          columns: "*"
+      retry_conf:
+        num_retries: 2
+        interval_sec: 30
+        timeout_sec: 60
+      webhook: "{{EVENT_TRIGGER_URL}}/events/dbEvent"
+      headers:
+        - name: x-hasura-admin-secret
+          value_from_env: HASURA_GRAPHQL_ADMIN_SECRET
+      comment: "Fires on workflow_results INSERT to trigger db_event workflows."
   # No insert/update/delete for any role — results written by action handlers via admin secret
 
 - table:
@@ -523,3 +538,18 @@
         filter:
           org_id:
             _eq: X-Hasura-Org-Id
+  event_triggers:
+    - name: notification_delivery
+      definition:
+        enable_manual: false
+        insert:
+          columns: "*"
+      retry_conf:
+        num_retries: 3
+        interval_sec: 10
+        timeout_sec: 30
+      webhook: "{{EVENT_TRIGGER_URL}}/events/notificationDelivery"
+      headers:
+        - name: x-hasura-admin-secret
+          value_from_env: HASURA_GRAPHQL_ADMIN_SECRET
+      comment: "Fires on notifications INSERT to deliver email/slack/webhook notifications asynchronously."
