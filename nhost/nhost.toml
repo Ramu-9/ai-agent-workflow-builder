@@ -33,15 +33,7 @@
     [auth.method.emailPassword]
       emailVerificationRequired = false
 
-  [auth.email]
-    enabled = true
-    [auth.email.smtp]
-      host = "mailhog"
-      port = 1025
-      user = "user"
-      password = "password"
-      sender = "noreply@vocallabs.local"
-      secure = false
+
 
 [postgres]
   version = "15-alpine"
