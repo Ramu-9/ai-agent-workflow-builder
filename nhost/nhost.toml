@@ -40,8 +40,6 @@
 
 [storage]
   version = "0.6.1"
-  [storage.resources.storage]
-    capacity = 1
 
 [functions]
   [functions.node]
