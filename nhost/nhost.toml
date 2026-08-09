@@ -6,7 +6,7 @@
 [hasura]
   version = "v2.42.0"
   adminSecret = "{{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}"
-
+  
   [[hasura.jwtSecrets]]
     type = "RS256"
     key = "{{ secrets.NHOST_JWT_PUBLIC_KEY }}"
@@ -33,8 +33,6 @@
     [auth.method.emailPassword]
       emailVerificationRequired = false
 
-
-
 [postgres]
   version = "15-alpine"
   [postgres.resources.storage]
@@ -42,7 +40,13 @@
 
 [storage]
   version = "0.6.1"
+  [storage.resources.storage]
+    capacity = 1
 
 [functions]
   [functions.node]
     version = 20
+
+[observability]
+  [observability.grafana]
+    adminPassword = "{{ secrets.GRAFANA_ADMIN_PASSWORD }}"
