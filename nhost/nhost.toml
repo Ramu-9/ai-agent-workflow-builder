@@ -37,6 +37,8 @@
 
 [postgres]
   version = "15-alpine"
+  [postgres.resources.storage]
+    capacity = 1
 
 [storage]
   version = "0.6.1"
