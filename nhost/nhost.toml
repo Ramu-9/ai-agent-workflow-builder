@@ -8,8 +8,8 @@
   adminSecret = "{{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}"
 
   [[hasura.jwtSecrets]]
-    type = "HS256"
-    key = "{{ secrets.NHOST_JWT_SECRET_KEY }}"
+    type = "RS256"
+    key = "{{ secrets.NHOST_JWT_PUBLIC_KEY }}"
 
 [auth]
   version = "0.26.0"
