@@ -10,5 +10,5 @@
     retry_interval_seconds: 30
   headers:
     - name: x-hasura-admin-secret
-      value_from_env: HASURA_GRAPHQL_ADMIN_SECRET
+      value_from_env: NHOST_ADMIN_SECRET
   comment: "Runs every 5 minutes to check for active scheduled workflow triggers and execute them."

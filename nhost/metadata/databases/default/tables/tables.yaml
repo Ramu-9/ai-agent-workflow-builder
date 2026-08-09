@@ -484,7 +484,7 @@
       webhook: "{{EVENT_TRIGGER_URL}}/events/dbEvent"
       headers:
         - name: x-hasura-admin-secret
-          value_from_env: HASURA_GRAPHQL_ADMIN_SECRET
+          value_from_env: NHOST_ADMIN_SECRET
       comment: "Fires on workflow_results INSERT to trigger db_event workflows."
   # No insert/update/delete for any role — results written by action handlers via admin secret
 
@@ -551,5 +551,5 @@
       webhook: "{{EVENT_TRIGGER_URL}}/events/notificationDelivery"
       headers:
         - name: x-hasura-admin-secret
-          value_from_env: HASURA_GRAPHQL_ADMIN_SECRET
+          value_from_env: NHOST_ADMIN_SECRET
       comment: "Fires on notifications INSERT to deliver email/slack/webhook notifications asynchronously."
