@@ -4,7 +4,6 @@
   value = "{{ secrets.GEMINI_API_KEY }}"
 
 [hasura]
-  version = "v2.42.0"
   adminSecret = "{{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}"
   
   [[hasura.jwtSecrets]]
@@ -12,7 +11,6 @@
     key = "{{ secrets.NHOST_JWT_PUBLIC_KEY }}"
 
 [auth]
-  version = "0.26.0"
 
   [auth.redirections]
     clientUrl = "http://localhost:3001"
@@ -34,12 +32,10 @@
       emailVerificationRequired = false
 
 [postgres]
-  version = "15-alpine"
   [postgres.resources.storage]
     capacity = 1
 
 [storage]
-  version = "0.6.1"
 
 [functions]
   [functions.node]
