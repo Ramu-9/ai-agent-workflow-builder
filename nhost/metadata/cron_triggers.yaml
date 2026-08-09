@@ -1,0 +1,15 @@
+cron_triggers:
+  - name: scheduled_workflow_runner
+    webhook: "{{EVENT_TRIGGER_URL}}/scheduled/cronRunner"
+    schedule: "*/5 * * * *"
+    include_in_metadata: true
+    payload: {}
+    retry_conf:
+      num_retries: 1
+      timeout_seconds: 120
+      tolerance_seconds: 21600
+      retry_interval_seconds: 30
+    headers:
+      - name: x-hasura-admin-secret
+        value_from_env: HASURA_GRAPHQL_ADMIN_SECRET
+    comment: "Runs every 5 minutes to check for active scheduled workflow triggers and execute them."

@@ -1,0 +1,54 @@
+[global]
+[[global.environment]]
+  name = "GEMINI_API_KEY"
+  value = "{{ secrets.GEMINI_API_KEY }}"
+
+[hasura]
+  version = "v2.42.0"
+  adminSecret = "{{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}"
+
+  [[hasura.jwtSecrets]]
+    type = "HS256"
+    key = "{{ secrets.NHOST_JWT_SECRET_KEY }}"
+
+[auth]
+  version = "0.26.0"
+
+  [auth.redirections]
+    clientUrl = "http://localhost:3001"
+
+  [auth.signUp]
+    enabled = true
+    disableNewUsers = false
+
+  [auth.session]
+    [auth.session.accessToken]
+      expiresIn = 900
+      customClaims = [
+        { key = "org-id", value = "metadata.org_id" },
+        { key = "org-role", value = "metadata.org_role" }
+      ]
+
+  [auth.method]
+    [auth.method.emailPassword]
+      emailVerificationRequired = false
+
+  [auth.email]
+    enabled = true
+    [auth.email.smtp]
+      host = "mailhog"
+      port = 1025
+      user = "user"
+      password = "password"
+      sender = "noreply@vocallabs.local"
+      secure = false
+
+[postgres]
+  version = "15-alpine"
+
+[storage]
+  version = "0.6.1"
+
+[functions]
+  [functions.node]
+    version = 18

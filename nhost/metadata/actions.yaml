@@ -1,0 +1,82 @@
+actions:
+  - name: triggerWorkflowRun
+    definition:
+      kind: synchronous
+      handler: "{{ACTION_BASE_URL}}/actions/triggerWorkflowRun"
+      forward_client_headers: true
+    permissions:
+      - role: owner
+      - role: editor
+    comment: "Triggers a workflow run. Validates caller is owner/editor in the workflow's org, checks quota atomically, then executes steps sequentially."
+
+  - name: approveStep
+    definition:
+      kind: synchronous
+      handler: "{{ACTION_BASE_URL}}/actions/approveStep"
+      forward_client_headers: true
+    permissions:
+      - role: owner
+      - role: editor
+    comment: "Approves a paused approval_gate step. Validates caller is owner/editor in the step's org, then resumes execution."
+
+  - name: createWebhookTrigger
+    definition:
+      kind: synchronous
+      handler: "{{ACTION_BASE_URL}}/actions/createWebhookTrigger"
+      forward_client_headers: true
+    permissions:
+      - role: owner
+    comment: "Creates a webhook trigger with a generated secret. Returns the secret once — it cannot be retrieved again."
+
+custom_types:
+  input_objects:
+    - name: TriggerWorkflowRunInput
+      fields:
+        - name: workflow_id
+          type: uuid!
+        - name: context
+          type: jsonb
+
+    - name: ApproveStepInput
+      fields:
+        - name: step_run_id
+          type: uuid!
+
+    - name: CreateWebhookTriggerInput
+      fields:
+        - name: workflow_id
+          type: uuid!
+        - name: config
+          type: jsonb
+
+  objects:
+    - name: TriggerWorkflowRunOutput
+      fields:
+        - name: workflowRunId
+          type: uuid!
+        - name: status
+          type: String!
+        - name: message
+          type: String!
+
+    - name: ApproveStepOutput
+      fields:
+        - name: success
+          type: Boolean!
+        - name: message
+          type: String!
+        - name: workflow_run_id
+          type: uuid!
+        - name: resumed_status
+          type: String
+
+    - name: CreateWebhookTriggerOutput
+      fields:
+        - name: trigger_id
+          type: uuid!
+        - name: webhook_secret
+          type: String!
+        - name: webhook_url
+          type: String!
+        - name: message
+          type: String!
